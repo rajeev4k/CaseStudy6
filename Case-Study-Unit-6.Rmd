@@ -8,56 +8,59 @@ output:
 ---
 #Introduction
 The objective of this project is to gather, cleanse and analyze the GDP data across countries. It also aims to discover the GDP contribution of the countries of the different income groups. 
-Moreover, we also want to determine the total number of the lower income countries which are in the group of highest GDP.
+Moreover, we also want to determine the total number of the lower income countries which are in the group of the highest GDP.
 
 #Download GDP and Educational Source Data Raw Files 
 
 ```{r}
+# Set Working Directory
 setwd("/Users/rajeevkumar/Documents/R-Studio/CaseStudy6")
 sitegdp="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
-download.file(sitegdp, destfile = "./Analysis/Data/getdata%2Fdata%2FGDP.csv", method="curl")
+#Download GDP File from web to local
+download.file(sitegdp, destfile = "./getdata%2Fdata%2FGDP.csv", method="curl")
 siteed="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
-download.file(siteed, destfile = "./Analysis/Data/getdata%2Fdata%2FEDSTATS_Country.csv", method="curl")
+#Download Education Data File from web to local
+download.file(siteed, destfile = "./getdata%2Fdata%2FEDSTATS_Country.csv", method="curl")
 ```
 
 #Read and Clean Downloaded GDP Data into R
 ```{r}
-#Read Downloaded GDP Data into R. skip first 5 rows and read 231 rows
-GdpRawData<-read.csv("./Analysis/Data/getdata%2Fdata%2FGDP.csv",sep=",",header = FALSE,skip = 5,nrows = 231)
+#Read GDP csv file into R. skip first 5 rows and read 231 rows
+GdpRawData<-read.csv("./getdata%2Fdata%2FGDP.csv",sep=",",header = FALSE,skip = 5,nrows = 231)
 
-# Read only column 1,2,4 and 5 
+# Read only column 1,2,4 and 5 : Subset of Data
 GdpData<-GdpRawData[c(1,2,4,5)]
 
-# Add column name to each variables
+# Add column name to each variables : Labelling each column.
 names(GdpData)<-c("CountryCode","Ranking","Country","GDP")
 
-#Remove "," From GDP
+#Remove "," From GDP : Data Cleansing
 GdpData$GDP<-gsub(",","",GdpData$GDP)
 
 #Count Number of NA in all fields
 sapply(GdpData, function(x) sum(is.na(x)))
 
-# Keep only those whose Ranking is available
+# Keep only those whose Ranking is available : Data Cleansing
 GdpData<-subset(x=GdpData,!is.na(GdpData$Ranking))
 
-#Convert Factor to Charachter
+#Convert Factor to Charachter : Data Type Conversion
 GdpData$CountryCode<-as.character(GdpData$CountryCode)
 GdpData$Country<-as.character(GdpData$Country)
 
-#Convert GDP to Number
+#Convert GDP to Number : Data Type Conversion
 GdpData$GDP<-as.numeric(GdpData$GDP)
 ```
 
 #Read and Clean Downloaded Education Data into R
 ```{r}
-EducRawData<-read.csv("./Analysis/Data/getdata%2Fdata%2FEDSTATS_Country.csv",sep=",",header = TRUE)
+EducRawData<-read.csv("./getdata%2Fdata%2FEDSTATS_Country.csv",sep=",",header = TRUE)
 
 #Count Number of NA in all fields
 sapply(EducRawData, function(x) sum(is.na(x)))
 
 ```
 
-#Merge Data of 2 datasets
+#Merge Data of 2 datasets on Country Code Column
 ```{r}
 MergedGdpData<-merge(GdpData,EducRawData,by="CountryCode",all =TRUE)
 ```
@@ -76,7 +79,7 @@ SortedMergedGdpData$Country[13]
 #Q3:- What are the average GDP rankings for the "High income: OECD" and "High income: nonOECD" groups? 
 #For "High income: OECD"
 ```{r}
-#Remove Na from the data
+#Remove Na from the dataset
 FinalSortedMergedGdpData<-SortedMergedGdpData[which(!(is.na(SortedMergedGdpData$Ranking) | is.na(SortedMergedGdpData$Income.Group))),]
 mean(FinalSortedMergedGdpData$Ranking[which(FinalSortedMergedGdpData$Income.Group=="High income: OECD")])
 ```
