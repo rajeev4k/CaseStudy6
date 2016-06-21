@@ -11,17 +11,17 @@ June 15, 2016
 setwd("/Users/rajeevkumar/Documents/R-Studio/CaseStudy6")
 sitegdp="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
 #Download GDP File from web to local
-download.file(sitegdp, destfile = "./getdata%2Fdata%2FGDP.csv", method="curl")
+download.file(sitegdp, destfile = "./GDP.csv", method="curl")
 siteed="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
 #Download Education Data File from web to local
-download.file(siteed, destfile = "./getdata%2Fdata%2FEDSTATS_Country.csv", method="curl")
+download.file(siteed, destfile = "./EDSTATS_Country.csv", method="curl")
 ```
 
 #Read and Clean Downloaded GDP Data into R
 
 ```r
 #Read GDP csv file into R. skip first 5 rows and read 231 rows
-GdpRawData<-read.csv("./getdata%2Fdata%2FGDP.csv",sep=",",header = FALSE,skip = 5,nrows = 231)
+GdpRawData<-read.csv("./GDP.csv",sep=",",header = FALSE,skip = 5,nrows = 231)
 
 # Read only column 1,2,4 and 5 : Subset of Data
 GdpData<-GdpRawData[c(1,2,4,5)]
@@ -56,7 +56,7 @@ GdpData$GDP<-as.numeric(GdpData$GDP)
 #Read and Clean Downloaded Education Data into R
 
 ```r
-EducRawData<-read.csv("./getdata%2Fdata%2FEDSTATS_Country.csv",sep=",",header = TRUE)
+EducRawData<-read.csv("./EDSTATS_Country.csv",sep=",",header = TRUE)
 
 #Count Number of NA in all fields
 sapply(EducRawData, function(x) sum(is.na(x)))
@@ -189,16 +189,10 @@ p
 ![](Case-Study-Unit-6_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ```r
-summary(FinalSortedMergedGdpData$Income.Group)
+#summary(FinalSortedMergedGdpData$Income.Group)
 ```
 
-```
-##                      High income: nonOECD    High income: OECD 
-##                    0                   23                   30 
-##           Low income  Lower middle income  Upper middle income 
-##                   37                   54                   45
-```
-
+### Above plot shows that in the top 10 highest GDP countries,there are two lower middle income countries.
 
 #Q5:- Cut the GDP ranking into 5 separate quantile groups. Make a table versus Income.Group. How many countries are Lower middle income but among the 38 nations with highest GDP?
 
@@ -214,7 +208,8 @@ sum(SortedMergedGdpData$Income.Group == "Lower middle income" & SortedMergedGdpD
 ```
 ## [1] 5
 ```
-
+# Conclusion :- 
+#####There are 5 countries in the lower middle income group countries which are among the 38 nations with highest GDP. Average ranking of the High income OECD countries is 32.96667 whereas it is 91.91304 for the High income non-OECD countries, which suggests that the High income OECD countries are also among the top contributors of world's GDP.
 
 
 
