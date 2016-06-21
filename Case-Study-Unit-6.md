@@ -1,9 +1,7 @@
 # Case Study for Unit 6
 Rajeev  
 June 15, 2016  
-#Introduction
-The objective of this project is to gather, cleanse and analyze the GDP data across countries. It also aims to discover the GDP contribution of the countries of the different income groups. 
-Moreover, we also want to determine the total number of the lower income countries which are in the group of the highest GDP.
+
 
 #Download GDP and Educational Source Data Raw Files 
 
