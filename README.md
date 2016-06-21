@@ -5,7 +5,7 @@ The objective of this project is to gather, cleanse and analyze the GDP data acr
 the GDP contribution of the countries of the different income groups. Moreover, we also want to determine the total number of 
 the lower income countries which are in the group of the highest GDP.
 
-#Objective of this case study to answer the following questions:-
+####Objective of this case study to answer the following questions:-
 1.	Match the data based on the country shortcode. How many of the IDs match? 
 2.	Sort the data frame in ascending order by GDP rank (so United States is last). What is the 13th country in the resulting data frame?
 3.	What are the average GDP rankings for the "High income: OECD" and "High income: nonOECD" groups? 
@@ -26,3 +26,7 @@ stats graphics grDevices utils datasets methods base
 
 ####Loaded via a namespace (and not attached):  
 rsconnect_0.4.2.2,htmltools_0.3.5, tools_3.3.0, yaml_2.1.13, Rcpp_0.12.4, rmarkdown_0.9.6, digest_0.6.9 
+
+#Conclusion
+There are 5 countries in the lower middle income group countries which are among the 38 nations with highest GDP. Average ranking of the High income OECD countries is 32.96667 whereas it is 91.91304 for the High income non-OECD countries, which suggests that the High income OECD countries are also among the top contributors of world's GDP.
+
