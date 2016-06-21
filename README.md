@@ -25,8 +25,4 @@ locale:
 stats graphics grDevices utils datasets methods base       
 
 ####Loaded via a namespace (and not attached):  
-colorspace_1.2-6  scales_0.4.0      plyr_1.8.3      
-rsconnect_0.4.2.2 htmltools_0.3.5   tools_3.3.0     
-gtable_0.2.0      yaml_2.1.13       Rcpp_0.12.4    
-ggplot2_2.1.0     rmarkdown_0.9.6   grid_3.3.0  
-digest_0.6.9      munsell_0.4.3 
+rsconnect_0.4.2.2,htmltools_0.3.5, tools_3.3.0, yaml_2.1.13, Rcpp_0.12.4, rmarkdown_0.9.6, digest_0.6.9 
