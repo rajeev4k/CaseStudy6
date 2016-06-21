@@ -1,5 +1,5 @@
 ---
-title: "Case Study for Unit 6"
+title: "GDP Analysis of Countries"
 author: "Rajeev"
 date: "June 15, 2016"
 output:
